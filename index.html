@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SESMA — Building Your Digital Future</title>
+  <meta name="description" content="حلول رقمية متكاملة لإدارة المخزون والمبيعات والموظفين والحسابات. مواقع متجاوبة وتطبيقات web متطورة للشركات الصغيرة والمتوسطة">
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="SESMA Technology">
+
+  <!-- ============ SECURITY HEADERS ============
+       ملاحظة هامة: X-Frame-Options, X-Content-Type-Options و Permissions-Policy
+       المتصفحات بتتجاهلهم تماماً لو اتحطوا كـ <meta> — لازم يترسلوا كـ HTTP
+       response headers فعلية من إعدادات السيرفر/الاستضافة. راجع ملف
+       SECURITY-HEADERS.md المرفق لأمثلة جاهزة (Nginx / Apache / Netlify / Vercel).
+       الـ Referrer-Policy فقط من دول شغال فعلياً عن طريق meta، فسبناه هنا.
+  -->
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <!-- Content-Security-Policy
+       ملاحظة: تم توسيع script-src / style-src / connect-src / frame-src
+       عشان تسمح بتحميل سكريبت Web3Forms وتشغيل ودجت hCaptcha بداخله
+       (الدومينات دي موثقة رسمياً من hCaptcha ومن Web3Forms).
+  -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://web3forms.com https://hcaptcha.com https://*.hcaptcha.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'self' https://api.web3forms.com https://hcaptcha.com https://*.hcaptcha.com;
+    frame-src https://hcaptcha.com https://*.hcaptcha.com;
+    frame-ancestors 'self';
+    form-action 'self' https://api.web3forms.com;
+    base-uri 'self';
+    object-src 'none';
+  ">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SESMA — حلول رقمية متكاملة">
+  <meta property="og:description" content="حلول رقمية متكاملة لإدارة المخزون والمبيعات والموظفين والحسابات للشركات الصغيرة والمتوسطة">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_EG">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="sesma.png">
+
+  <!-- Canonical URL (عدّل الدومين الفعلي عند النشر) -->
+  <link rel="canonical" href="https://sesmatech.com/">
+
+  <!-- Open Graph image (لازم لظهور صورة عند مشاركة الرابط) -->
+  <meta property="og:image" content="https://sesmatech.com/sesma.png">
+  <meta property="og:url" content="https://sesmatech.com/">
+
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Preconnect to Google Fonts with crossorigin for SRI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+
+  <!-- Fonts
+       ملاحظة: تم إزالة السمة integrity (SRI) هنا لأن استجابة Google Fonts CSS
+       بتتغير حسب الـ User-Agent (بترجع @font-face مختلفة لكل متصفح)، فمفيش hash
+       ثابت يفضل صحيح لكل الزوار — لو استخدمنا SRI هنا كان ممكن يمنع تحميل
+       الخطوط تماماً لجزء من الزوار. SRI مناسب بس للملفات الثابتة الحقيقية.
+  -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+    referrerpolicy="no-referrer"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">اذهب للمحتوى الرئيسي</a>
+
+  <!-- NAVBAR -->
+  <header class="navbar" role="banner" id="top">
+    <div class="navbar-wrapper">
+      <!-- LOGO -->
+      <div class="navbar-logo">
+        <a href="#top" class="logo-link" aria-label="SESMA - الصفحة الرئيسية">
+          <img
+            src="sesma.png"
+            alt="SESMA - حلول رقمية متكاملة"
+            width="90"
+            height="90"
+            class="logo-image"
+            loading="eager"
+            decoding="async"
+          >
+          <div class="logo-text">
+            <span class="logo-name">SESMA</span>
+            <span class="logo-tagline">Technology</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- NAVIGATION -->
+      <nav class="navbar-nav" aria-label="القائمة الرئيسية">
+        <a href="#solutions" class="nav-link">حلولنا</a>
+        <a href="#vision" class="nav-link">رؤيتنا</a>
+        <a href="#services" class="nav-link">الخدمات</a>
+      </nav>
+
+      <!-- CTA BUTTON -->
+      <a href="#contact" class="btn btn-cta">تحدث معنا</a>
+
+      <!-- MOBILE MENU TOGGLE -->
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="فتح القائمة"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav class="mobile-nav" id="mobileNav" hidden aria-label="القائمة المحمولة">
+      <a href="#solutions" class="mobile-link">حلولنا</a>
+      <a href="#vision" class="mobile-link">رؤيتنا</a>
+      <a href="#services" class="mobile-link">الخدمات</a>
+      <a href="#contact" class="btn btn-cta mobile-cta-link">تحدث معنا</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO SECTION -->
+    <section class="hero" aria-label="القسم الرئيسي">
+      <div class="hero-bg">
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="noise"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          حول شركتك للعصر الرقمي
+        </div>
+
+        <h1 class="hero-title">
+          من ورقة وقلم<br>
+          <span class="gradient-text">إلى نظام رقمي متكامل</span>
+        </h1>
+
+        <p class="hero-description">
+          شركتك الصغيرة تستحق أدوات احترافية وعلشان كدا أحنا هنا بنساعدك في إنشاء و تطوير موقعك الألكتروني بكل احترافية و كمان نقدر نقدم لك تطبيقات ويب ذكية لإدارة مخزونك ومبيعاتك ومصروفاتك و كمان موظفينك بسهولة وفعالية.
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="logo-showcase">
+          <img
+            src="sesma.png"
+            alt="SESMA Logo"
+            width="400"
+            height="400"
+            class="showcase-logo"
+            loading="eager"
+            decoding="async"
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="problem" aria-labelledby="problems-heading">
+      <div class="problem-container">
+        <h2 class="section-title" id="problems-heading">المشاكل التي تواجهها</h2>
+        <p class="section-subtitle">هل تعاني من هذه التحديات؟</p>
+
+        <div class="problems-grid">
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">📋</div>
+            <h3>الإدارة اليدوية</h3>
+            <p>قضاء ساعات في تسجيل المبيعات والمخزون على ورق</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">⚠️</div>
+            <h3>الأخطاء البشرية</h3>
+            <p>فقدان البيانات والأخطاء في الحسابات والحسابات الختامية</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">⏱️</div>
+            <h3>ضياع الوقت</h3>
+            <p>عدم القدرة على متابعة الموظفين والعمليات بسهولة</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">💻</div>
+            <h3>عدم الاحترافية</h3>
+            <p>عدم وجود موقع إلكتروني احترافي يعكس صورة شركتك</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">📊</div>
+            <h3>نقص الرؤية</h3>
+            <p>عدم القدرة على الوصول إلى تقارير فورية ومحللة</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon" aria-hidden="true">🔄</div>
+            <h3>التعقيد التشغيلي</h3>
+            <p>صعوبة تنسيق العمل بين الأقسام المختلفة</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTIONS SECTION -->
+    <section class="solutions" id="solutions" aria-labelledby="solutions-heading">
+      <div class="solutions-container">
+        <h2 class="section-title" id="solutions-heading">حلولنا المتكاملة</h2>
+        <p class="section-subtitle">ثلاثة حلول شاملة تغير طريقة عملك</p>
+
+        <div class="solutions-grid">
+          <div class="solution-card">
+            <div class="solution-number" aria-hidden="true">01</div>
+            <h3>💻 المواقع الإلكترونية</h3>
+            <p>مواقع احترافية متجاوبة على جميع الأجهزة. تصميم عصري يعكس هويتك وينجز الطلبات من العملاء بسهولة.</p>
+            <ul class="solution-features">
+              <li>✓ تصميم متجاوب (Mobile First)</li>
+              <li>✓ سرعة عالية وآمن تماماً</li>
+              <li>✓ تكامل مع أنظمة الدفع</li>
+              <li>✓ محرك بحث محسّن (SEO)</li>
+            </ul>
+          </div>
+
+          <div class="solution-card featured">
+            <div class="solution-number" aria-hidden="true">02</div>
+            <h3>📊 تطبيقات إدارة العمليات</h3>
+            <p>تطبيق ويب ذكي لإدارة المخزون والمبيعات والمصروفات وفريقك كله من لوحة تحكم واحدة.</p>
+            <ul class="solution-features">
+              <li>✓ إدارة المخزون في الوقت الفعلي</li>
+              <li>✓ تتبع المبيعات والمصروفات</li>
+              <li>✓ إدارة الموظفين والعمال</li>
+              <li>✓ تقارير ولوحات معلومات فورية</li>
+            </ul>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-number" aria-hidden="true">03</div>
+            <h3>💰 الحلول المالية الذكية</h3>
+            <p>نظام محاسبة ذكي يولد الحسابات الختامية تلقائياً ويساعدك على فهم صحتك المالية بالكامل.</p>
+            <ul class="solution-features">
+              <li>✓ فواتير تلقائية ودقيقة</li>
+              <li>✓ حسابات ختامية فورية</li>
+              <li>✓ تقارير ضريبية جاهزة</li>
+              <li>✓ تتبع الأرباح والخسائر</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION SECTION -->
+    <section class="vision" id="vision" aria-labelledby="vision-heading">
+      <div class="vision-container">
+        <div class="vision-content">
+          <h2 class="section-title" id="vision-heading">رؤيتنا</h2>
+          <div class="vision-statement">
+            <p class="vision-text">
+              <span class="vision-highlight">نحن نؤمن أن كل شركة صغيرة ومتوسطة تستحق أن تعمل بكفاءة واحترافية.</span>
+              لذلك نبني حلول رقمية متطورة تجعل عمليات إدارتك سهلة وسريعة وآمنة.
+            </p>
+            <p class="vision-text">
+              هدفنا هو <span class="vision-highlight">تحويل شركتك من عملية يدوية معقدة إلى نظام رقمي ذكي</span> يعمل بكفاءة 24/7، ويعطيك الوقت لتركز على نمو عملك، لا على إدارة الأوراق.
+            </p>
+          </div>
+
+          <div class="vision-values">
+            <div class="value-card">
+              <div class="value-icon" aria-hidden="true">🎯</div>
+              <h4>التركيز على احتياجاتك</h4>
+              <p>نسمع مشاكلك ونبني الحل المناسب لشركتك</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon" aria-hidden="true">⚡</div>
+              <h4>الكفاءة والسرعة</h4>
+              <p>حلول سريعة وفعّالة توفر لك الوقت والمال</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon" aria-hidden="true">🔒</div>
+              <h4>الأمان والموثوقية</h4>
+              <p>بيانات محمية وأنظمة موثوقة تعمل طول الوقت</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vision-visual">
+          <div class="transformation">
+            <div class="before">
+              <h4>قبل SESMA</h4>
+              <div class="before-icon" aria-hidden="true">📋</div>
+              <p>إدارة يدوية معقدة<br>أخطاء وفوضى<br>إهدار للوقت والمال</p>
+            </div>
+            <div class="arrow" aria-hidden="true">&#8594;</div>
+            <div class="after">
+              <h4>مع SESMA</h4>
+              <div class="after-icon" aria-hidden="true">⚡</div>
+              <p>نظام ذكي متكامل<br>دقة عالية وسهولة<br>توفير الوقت والمال</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features" id="services" aria-labelledby="features-heading">
+      <div class="features-container">
+        <h2 class="section-title" id="features-heading">لماذا تختار SESMA؟</h2>
+        <p class="section-subtitle">مميزات تجعلنا الخيار الأفضل</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🚀</div>
+            <h3>سهل وسريع</h3>
+            <p>تطبيقات سهلة الاستخدام لا تحتاج تدريب معقد</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">💰</div>
+            <h3>أسعار عادلة</h3>
+            <p>خطط مرنة مناسبة لحجم شركتك وميزانيتك</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📱</div>
+            <h3>يعمل في كل مكان</h3>
+            <p>متاح على الهاتف والحاسوب والتابلت</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔄</div>
+            <h3>تحديثات مستمرة</h3>
+            <p>نضيف مميزات جديدة باستمرار بناءً على احتياجاتك</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🤝</div>
+            <h3>دعم حقيقي</h3>
+            <p>فريق دعم متاح لمساعدتك في أي وقت</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📊</div>
+            <h3>بيانات وتقارير</h3>
+            <p>رؤية كاملة عن عملك من خلال تقارير ذكية</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- CTA SECTION -->
+    <section class="cta" aria-label="دعوة للعمل">
+      <div class="cta-content">
+        <h2>هل أنت جاهز لتغيير طريقة عملك؟</h2>
+        <p>دع شركتك تنمو بدون تعقيدات إدارية</p>
+        <a href="#contact" class="btn btn-primary btn-large">
+          احجز استشارة مجانية
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 10h12M12 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact" aria-labelledby="contact-heading">
+      <div class="contact-wrapper">
+        <h2 class="section-title" id="contact-heading">تواصل معنا</h2>
+        <p class="section-subtitle">دعنا نناقش كيفية مساعدتك</p>
+
+        <div class="contact-grid">
+          <form
+            class="contact-form"
+            id="contactForm"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            novalidate
+            autocomplete="on"
+          >
+            <!-- Web3Forms hidden fields -->
+            <input type="hidden" name="access_key" value="af10b044-fdc7-4e18-892a-3b8f9bb7fe07">
+            <input type="hidden" name="subject" value="رسالة جديدة من نموذج التواصل - SESMA">
+            <input type="hidden" name="from_name" value="SESMA Website">
+
+            <!-- Honeypot anti-spam field (hidden from users, bots fill it) -->
+            <div class="form-honeypot" aria-hidden="true" tabindex="-1">
+              <label for="website">لا تملأ هذا الحقل</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="contact-name" class="sr-only">اسمك</label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="اسمك"
+                required
+                maxlength="100"
+                minlength="2"
+                autocomplete="name"
+                pattern="^[\p{L}\s\-\'.]{2,100}$"
+                title="يرجى إدخال اسم صحيح (حروف ومسافات فقط)"
+              >
+            </div>
+            <div class="form-group">
+              <label for="contact-email" class="sr-only">بريدك الإلكتروني</label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="بريدك الإلكتروني"
+                required
+                maxlength="254"
+                autocomplete="email"
+                title="يرجى إدخال بريد إلكتروني صحيح"
+              >
+            </div>
+            <div class="form-group">
+              <label for="contact-phone" class="sr-only">رقم هاتفك</label>
+              <input
+                type="tel"
+                id="contact-phone"
+                name="phone"
+                placeholder="رقم هاتفك"
+                maxlength="20"
+                autocomplete="tel"
+                pattern="^[\d\s\+\-\(\)]{7,20}$"
+                title="يرجى إدخال رقم هاتف صحيح"
+              >
+            </div>
+            <div class="form-group">
+              <label for="contact-message" class="sr-only">أخبرنا عن احتياجاتك</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="أخبرنا عن احتياجاتك"
+                rows="4"
+                required
+                maxlength="2000"
+                minlength="10"
+                title="يرجى كتابة رسالة لا تقل عن 10 أحرف"
+              ></textarea>
+              <div class="char-counter" aria-live="polite">
+                <span id="charCount">0</span> / 2000
+              </div>
+            </div>
+
+            <!-- hCaptcha widget (Web3Forms zero-config integration) -->
+            <div class="h-captcha" data-captcha="true"></div>
+
+            <button type="submit" class="btn btn-primary btn-large" id="submitBtn">أرسل الآن</button>
+          </form>
+
+          <div class="contact-info">
+            <div class="info-block">
+              <h4>📧 البريد الإلكتروني</h4>
+              <a href="mailto:info@sesmatech.com">info@sesmatech.com</a>
+            </div>
+            <div class="info-block">
+              <h4>☎️ الهاتف</h4>
+              <a href="tel:+201040000179" dir="ltr">+20 104 000 0179</a>
+            </div>
+            <div class="info-block">
+              <h4>💬 واتساب</h4>
+              <a href="https://wa.me/201001790590" target="_blank" rel="noopener noreferrer" dir="ltr">+20 100 179 0590</a>
+            </div>
+            <div class="social-links">
+              <a href="https://x.com/sesmatech" class="social-icon" title="تويتر" target="_blank" rel="noopener noreferrer" aria-label="تابعنا على تويتر">𝕏</a>
+              <a href="https://linkedin.com/company/sesmatech" class="social-icon" title="لينكد إن" target="_blank" rel="noopener noreferrer" aria-label="تابعنا على لينكد إن">in</a>
+              <a href="https://facebook.com/sesmatech" class="social-icon" title="فيسبوك" target="_blank" rel="noopener noreferrer" aria-label="تابعنا على فيسبوك">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img
+          src="sesma.png"
+          alt="SESMA"
+          width="40"
+          height="40"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="brand-info">
+          <p class="brand-name">SESMA</p>
+          <p class="brand-tagline">حلول رقمية متكاملة</p>
+        </div>
+      </div>
+      <p class="footer-credit">&copy; <span id="year"></span> SESMA - تحويل الشركات الصغيرة والمتوسطة للعصر الرقمي</p>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" hidden aria-label="العودة إلى الأعلى">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M10 3l-7 7h4v7h6v-7h4l-7-7z"/>
+    </svg>
+  </button>
+
+  <script src="script.js" defer></script>
+  <!-- Required for hCaptcha widget rendering -->
+  <script src="https://web3forms.com/client/script.js" async defer></script>
+</body>
+</html>
