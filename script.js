@@ -511,6 +511,45 @@
   }
 
   /* ============================================
+     PORTFOLIO GALLERIES & SCROLL REVEALS
+     ============================================ */
+
+  document.querySelectorAll('[data-project-gallery]').forEach(function (gallery) {
+    var mainImage = gallery.querySelector('.portfolio-main-image');
+    var thumbs = gallery.querySelectorAll('[data-gallery-image]');
+    if (!mainImage || !thumbs.length) return;
+
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        var nextImage = thumb.getAttribute('data-gallery-image');
+        if (!nextImage || !isSafeUrl(nextImage)) return;
+        mainImage.style.opacity = '0.35';
+        window.setTimeout(function () {
+          mainImage.src = nextImage;
+          mainImage.style.opacity = '1';
+        }, 120);
+        thumbs.forEach(function (item) { item.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+      });
+    });
+  });
+
+  var revealItems = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window && revealItems.length) {
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    revealItems.forEach(function (item) { revealObserver.observe(item); });
+  } else {
+    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+  }
+
+  /* ============================================
      YEAR - تحديث تلقائي
      ============================================ */
 
